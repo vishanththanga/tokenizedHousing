@@ -48,5 +48,4 @@ module.exports = {
                 console.error('Transaction Failed', error)
             })
     }
-    sendTransaction(sourceKeyBase, stc, transInfo);
 }
