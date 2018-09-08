@@ -24,7 +24,7 @@ app.post('/api/addAccount',(req, res) => {
         dob: req.body.dob,
         email: req.body.email,
         telephone: req.body.telephone,
-      }).then(() => res.sendStatus(200));
+      }).then(() => res.sendStatus(200))
 })
 
 app.post('/api/addTrans', (req, res) => {
@@ -34,7 +34,7 @@ app.post('/api/addTrans', (req, res) => {
         to: req.body.to,
         from: req.body.from,
         assetCode: req.body.address,
-    }).then(res.sendStatus(200));
+    }).then(() => res.sendStatus(200));
 })
 
 app.post('/api/addHouse', (req, res) => {
@@ -44,20 +44,20 @@ app.post('/api/addHouse', (req, res) => {
         owner: req.body.owner,
         totalToken: req.body.totalToken,
         tokenSale: req.body.tokenSale,
-    }).then(res.sendStatus(200));
+    }).then(() => res.sendStatus(200));
 })
 
 app.get('/api/houses', (req, res) => {
     console.log('listing houses')
     return store.getAllHouses ()
-        .then(res.json(houses));
+        .then((houses) => res.json(houses));
 })
 
 app.get('/api/:houseId', (req, res) => {
     console.log(req.params.houseId)
     return store.getHouse ({
         hosueId: req.params.houseId,
-    }).then(res.json(house));
+    }).then((house) => res.json(house));
 })
 
 
