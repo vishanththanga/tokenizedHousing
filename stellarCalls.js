@@ -7,19 +7,19 @@ const stc = require('./stellarCalls.js')
 
 //Base Account
 const sourceKeyBase = StellarSdk.Keypair
-  .fromSecret('SBX7XHSD7ISYPDE7VYUCS6KAKKQQJ27CG7TVDXHEJIZT2T2TIDFHTRTG');
-const destinationId = 'GB5R2C2HKU5SZNRMMNVUSUELQTB55EPU6HSRFGF63RPTJYZK22B7RK6J';
+  .fromSecret('SD34RZWQFQYDHV3VW46LATYVTTZX7K5CTQ2YKHDEJK7BNPOGX4SOJAEU');
+const destinationId = 'GATTG2HJTJBUFFPDP5T5N2O2HBH74HXGPXYNVDOQOTGEN3ADGCFXVAHR';
 
 //issueingAccount
 const sourceKeyIssuing = StellarSdk.Keypair
-  .fromSecret('SB6JXU2KSXMJMCNLPWM74NMAKMXSXAIR5FR3LSX62NN4K2UYZJ54IIRU');
+  .fromSecret('SDAIKTY2VOKREX234AZL4TPALOHZ7ZD2Q34OC3TUV4DDW42KIPADJF5R');
 
 StellarSdk.Network.useTestNetwork();
 const server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
 let transaction;
 
 module.exports = {
-   sendTransaction (sourceKeyBase, db, transInfo) {
+   sendTransaction (sourceKeyBase, db, transInfo, server) {
        server.loadAccount(destinationId)
         .catch(StellarSdk.NotFoundError, (error) => {
             throw new Error('Account Does Not Exist');
@@ -32,10 +32,10 @@ module.exports = {
             transaction = new StellarSdk.TransactionBuilder(sourceAccount)
               .addOperation(StellarSdk.Operation.payment({
                   destination: destinationId,
-                  asset: new StellarSdk.Asset(transInfo[0].assetCode, 'GDITTRBNRNKBBEKQXSMPUOBDIM5UY25SMDFH44Q2ACXW5S4T3YXEC2TQ'),//
+                  asset: StellarSdk.Asset.native(),
                   amount: transInfo[0].amount
               }))
-              .addMemo(StellarSdk.Memo.text(`To: ${transInfo[0].to}, from:${transInfo[0].from}`))
+              .addMemo(StellarSdk.Memo.text(`T: ${transInfo[0].to} f:${transInfo[0].from} AC:${transInfo[0].assetCode} AM:${transInfo[0].amount}`))
               .build();
 
               transaction.sign(sourceKeyBase);
@@ -74,7 +74,7 @@ module.exports = {
             const transaction = new StellarSdk.TransactionBuilder(issuer)
               .addOperation(StellarSdk.Operation.payment({
                   destination: sourceKeyBase.publicKey(),
-                  asset: new StellarSdk.Asset('hTwo', sourceKeyIssuing.publicKey()),
+                  asset: new StellarSdk.Asset(assetInfo[0].assetCode, sourceKeyIssuing.publicKey()),
                   amount: assetInfo[0].totalToken,
               }))
               .build()

@@ -10,7 +10,7 @@ exports.up = knex => knex.schema.createTable('Accounts', (t) => {
   t.string('telephone').notNullable();
   t.string('hOne').defaultTo(0);
   t.string('hTwo').defaultTo(0);
-  t.timestamp(true, true);
+  t.timestamsps(true, true);
 })
 
 exports.down = knex => knex.schema.dropTableIfExists('Accounts');
