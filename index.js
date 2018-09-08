@@ -8,10 +8,16 @@ const db = require('./db-interactions');
 const stc = require('./stellarCalls');
 
 const app = express();
+const port = /*parseInt(config.server_port, 10) || */8080;
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.post('/api/addAccount', (res, req) => {
+app.post('/test', (res, req) => {
+    console.log(req.body);
+})
+// NEED TO FIGURE OUT THE APP.POST PROBLEM
+
+app.post('/api/addAccount',(res, req) => {
     console.log(req.body)
     return store.addAccount ({
         accountId: req.body.accountId,
@@ -59,4 +65,7 @@ app.get('/api/:houseId', (res, req) => {
     }).then(res.json(house));
 })
 
-app.listen(config.server_port).then(console.log(`Running on ${config.server_port}`))
+
+app.listen(port, () => {
+    console.log(`Running server on port ${config.server_port}`)
+}); 
