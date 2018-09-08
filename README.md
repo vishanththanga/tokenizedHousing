@@ -1,5 +1,5 @@
 # tokenizedHousing
-Building Housing Tokens to Create a Real Time Stock Market for Real Estate
+Building Housing Tokens to Create a Real Time Stock Market for Residential Real Estate
 
 You need to have node.js installed with an instance of mySQL server running on the computer
 You also need to have a .env file with the following things: 
