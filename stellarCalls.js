@@ -12,14 +12,14 @@ const destinationId = 'GBBEWXGEY37KFQN6BFCHXLEQMDMVADGIS22S3XKYZSMJPCT6HFU6VBHW'
 
 //issueingAccount
 const sourceKeyIssuing = StellarSdk.Keypair
-  .fromSecret('SBEEB22NUEZLERGJGXWP5ZVZF3NF6H5V6MMHU4D2WVDB7UKNODXCB7UG');
+  .fromSecret('SB6JXU2KSXMJMCNLPWM74NMAKMXSXAIR5FR3LSX62NN4K2UYZJ54IIRU');
 
 StellarSdk.Network.useTestNetwork();
 const server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
 let transaction;
 
 module.exports = {
-   sendTransaction (sourceKeyBase, stc, db, transInfo) {
+   sendTransaction (sourceKeyBase, db, transInfo) {
        server.loadAccount(destinationId)
         .catch(StellarSdk.NotFoundError, (error) => {
             throw new Error('Account Does Not Exist');
@@ -28,10 +28,11 @@ module.exports = {
             return server.loadAccount(sourceKeyBase.publicKey())
         }) 
         .then((sourceAccount) => {
+            console.log(transInfo[0].assetCode)
             transaction = new StellarSdk.TransactionBuilder(sourceAccount)
               .addOperation(StellarSdk.Operation.payment({
                   destination: destinationId,
-                  asset: new StellarSdk.Asset(transInfo[0].assetCode, 'GBSSI5CSKJ3WMB76VKMUXX7NN7SZKP4SOK5Y2Z5J5AEZCMK2UPAK2JOS'),
+                  asset: StellarSdk.Asset.native(),//new StellarSdk.Asset(transInfo[0].assetCode, 'GDITTRBNRNKBBEKQXSMPUOBDIM5UY25SMDFH44Q2ACXW5S4T3YXEC2TQ'),
                   amount: transInfo[0].amount
               }))
               .addMemo(StellarSdk.Memo.text(`To: ${transInfo[0].to}, from:${transInfo[0].from}`))
@@ -52,7 +53,7 @@ module.exports = {
                         })
                 })
             }).catch((error) => {
-                console.error('Transaction Failed', error)
+                console.log('Transaction Failed', error)
             })
     },
 
@@ -85,7 +86,7 @@ module.exports = {
                 return db.updateAssetOwner(assetInfo[0].owner, (parseInt(assetInfo[0].totalToken) - parseInt(assetInfo[0].tokenSale)))
             })
         })
-        .catch(console.error)
+        .catch(console.log('Assets Failed'))
 
    },
 }
