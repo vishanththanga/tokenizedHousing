@@ -8,18 +8,14 @@ const db = require('./db-interactions');
 const stc = require('./stellarCalls');
 
 const app = express();
-const port = /*parseInt(config.server_port, 10) || */8080;
+const port = parseInt(config.server_port, 10);
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/test', (res, req) => {
-    console.log(req.body);
-})
-// NEED TO FIGURE OUT THE APP.POST PROBLEM
-
-app.post('/api/addAccount',(res, req) => {
+app.post('/api/addAccount',(req, res) => {
     console.log(req.body)
-    return store.addAccount ({
+    return store
+      .addAccount ({
         accountId: req.body.accountId,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -28,11 +24,10 @@ app.post('/api/addAccount',(res, req) => {
         dob: req.body.dob,
         email: req.body.email,
         telephone: req.body.telephone,
-    })
-    .then(res.sendStatus(200));
+      }).then(() => res.sendStatus(200));
 })
 
-app.post('/api/addTrans', (res, req) => {
+app.post('/api/addTrans', (req, res) => {
     console.log(req.body)
     return store.addTrans ({
         txNum: req.body.txNum,
@@ -42,7 +37,7 @@ app.post('/api/addTrans', (res, req) => {
     }).then(res.sendStatus(200));
 })
 
-app.post('/api/addHouse', (res, req) => {
+app.post('/api/addHouse', (req, res) => {
     console.log(req.body)
     return store.addHouse ({
         houseId: req.body.houseId,
@@ -52,13 +47,13 @@ app.post('/api/addHouse', (res, req) => {
     }).then(res.sendStatus(200));
 })
 
-app.get('/api/houses', (res, req) => {
+app.get('/api/houses', (req, res) => {
     console.log('listing houses')
     return store.getAllHouses ()
         .then(res.json(houses));
 })
 
-app.get('/api/:houseId', (res, req) => {
+app.get('/api/:houseId', (req, res) => {
     console.log(req.params.houseId)
     return store.getHouse ({
         hosueId: req.params.houseId,
