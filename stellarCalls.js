@@ -5,7 +5,6 @@ const request = require('request');
 const db = require('./db-interactions.js');
 const stc = require('./stellarCalls.js')
 
-let transInfo;
 //Base Account
 const sourceKeyBase = StellarSdk.Keypair
   .fromSecret('SASY24Y4OOP3SLWJ3JNNNXQQMIS5ZAMB6BHRUMZCJCKAE4ZNWWEDDTO4');
@@ -20,7 +19,7 @@ const server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
 let transaction;
 
 module.exports = {
-   sendTransaction (sourceKeyBase, stc, transInfo) {
+   sendTransaction (sourceKeyBase, stc, db, transInfo) {
        server.loadAccount(destinationId)
         .catch(StellarSdk.NotFoundError, (error) => {
             throw new Error('Account Does Not Exist');
@@ -32,10 +31,10 @@ module.exports = {
             transaction = new StellarSdk.TransactionBuilder(sourceAccount)
               .addOperation(StellarSdk.Operation.payment({
                   destination: destinationId,
-                  asset: new StellarSdk.Asset(transInfo[0].assetCode, 'GBSSI5CSKJ3WMB76VKMUXX7NN7SZKP4SOK5Y2Z5J5AEZCMK2UPAK2JOS'),
-                  amount: transInfo.amount
+                  asset: StellarSdk.Asset.native(),//new StellarSdk.Asset(transInfo[0].assetCode, 'GBSSI5CSKJ3WMB76VKMUXX7NN7SZKP4SOK5Y2Z5J5AEZCMK2UPAK2JOS'),
+                  amount: transInfo[0].amount
               }))
-              .addMemo(StellarSdk.Memo.text(`To: ${transInfo.to}, from:${transInfo.from}`))
+              .addMemo(StellarSdk.Memo.text(`To: ${transInfo[0].to}, from:${transInfo[0].from}`))
               .build();
 
               transaction.sign(sourceKeyBase);
@@ -44,8 +43,14 @@ module.exports = {
             })
             .then((result) => {
                 console.log('Transaction Successful', result)
+                return db.updateTxhash(transInfo[0].txNum, result.hash).then(() => {
+                    return db.updateTxToOne(transInfo[0].txNum);
+                })
             }).catch((error) => {
                 console.error('Transaction Failed', error)
+                return db.revertTx(transInfo[0].txNum);
             })
-    }
+    },
+
+   // createAsset()
 }

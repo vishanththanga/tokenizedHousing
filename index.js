@@ -12,18 +12,18 @@ const port = parseInt(config.server_port, 10);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-StellarSdk.Network.useTestNetwork();
-const server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
-let transaction;
-
 //Base Account
 const sourceKeyBase = StellarSdk.Keypair
-  .fromSecret(config.baseAccount.secret);
+  .fromSecret('SASY24Y4OOP3SLWJ3JNNNXQQMIS5ZAMB6BHRUMZCJCKAE4ZNWWEDDTO4');
 const destinationId = 'GBBEWXGEY37KFQN6BFCHXLEQMDMVADGIS22S3XKYZSMJPCT6HFU6VBHW';
 
 //issueingAccount
 const sourceKeyIssuing = StellarSdk.Keypair
-  .fromSecret(config.issuingAccount.secret);
+  .fromSecret('SBEEB22NUEZLERGJGXWP5ZVZF3NF6H5V6MMHU4D2WVDB7UKNODXCB7UG');
+
+StellarSdk.Network.useTestNetwork();
+const server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
+let transaction;
 
 //all express related calls are here
 app.post('/api/addAccount',(req, res) => {
@@ -47,6 +47,7 @@ app.post('/api/addTrans', (req, res) => {
         txNum: req.body.txNum,
         to: req.body.to,
         from: req.body.from,
+        amount: req.body.amount,
         assetCode: req.body.address,
     }).then(() => res.sendStatus(200));
 })
@@ -79,4 +80,7 @@ app.listen(port, () => {
     console.log(`Running server on port ${config.server_port}`)
 }); 
 
-//all stellar 
+//all stellar
+db.pendingRequest().then((transInfo) => {
+    stc.sendTransaction(sourceKeyBase, stc, db, transInfo) 
+})

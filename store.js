@@ -15,12 +15,13 @@ module.exports = {
         });
     },
     
-    addTrans ({txNum, to, from, assetCode}) {
+    addTrans ({txNum, to, from, amount, assetCode}) {
         console.log('Adding Transaction');
         return knex('Transactions').insert({
             txNum,
             to,
             from,
+            amount,
             assetCode,
         });
     },
