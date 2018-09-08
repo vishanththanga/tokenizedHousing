@@ -18,11 +18,6 @@ module.exports = {
         return knex('Transactions').where('txNum', txNum).update({ 'txhash': txhash })
     },
 
-    paymentRecieved(txNum) {
-        console.log(`Payment Recieved for ${txnum}`)
-        return knex('Transcations').where('txNum', txNum).update('status', 0)
-    },
-
     // houses database
     pendingAssets() {
         console.log('Getting All Assets that need to be created')

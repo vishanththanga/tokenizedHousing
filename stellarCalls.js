@@ -88,34 +88,4 @@ module.exports = {
         .catch(console.error)
 
    },
-
-   makePayment(db, sourceKeyBase, txNum, amount) {
-    server.loadAccount(destinationId)
-    .catch(StellarSdk.NotFoundError, (error) => {
-        throw new Error('Account Does Not Exist');
-    })
-    .then(() => {
-        return server.loadAccount(sourceKeyBase.publicKey())
-    }) 
-    .then((sourceAccount) => {
-        transaction = new StellarSdk.TransactionBuilder(sourceAccount)
-          .addOperation(StellarSdk.Operation.payment({
-              destination: destinationId,
-              asset: StellarSdk.Asset.native(),
-              amount: amount
-          }))
-          .addMemo(StellarSdk.Memo.text(`To: ${transInfo[0].to}, from:${transInfo[0].from}`))
-          .build();
-
-          transaction.sign(sourceKeyBase);
-
-          return server.submitTransaction(transaction);
-        })
-        .then((result) => {
-            console.log('Transaction Successful', result)
-            return db.paymentRecieved(txNum)
-        }).catch((error) => {
-            console.error('Transaction Failed', error)
-        })       
-   }
 }
