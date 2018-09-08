@@ -81,40 +81,44 @@ app.listen(port, () => {
 
 //all stellar
 
-const delayFn = function (ms) {
-    return new Promise((resolve, reject) => {
-      setTimeout(resolve, ms);
-    });
-}
+// const delayFn = function (ms) {
+//     return new Promise((resolve, reject) => {
+//       setTimeout(resolve, ms);
+//     });
+// }
 
-function transactions(db, sourceKeyBase, stc) {
-    const delay = 10*1000;
-    db.pendingRequest().then((transInfo) => {
-        console.log(transInfo)
-        stc.sendTransaction(sourceKeyBase, db, transInfo) 
-    }).catch((e) => {
-        console.log('No New Transactions');
-        return delayFn(delay).then(() => { return  transactions(db, sourceKeyBase, stc) });
-    }).then(() => {
-        console.log('looping Transactions...');
-        return delayFn(delay).then(() => { return  transactions(db, sourceKeyBase, stc) });
-      });
-}
+// function transactions(db, sourceKeyBase, stc) {}
+//     const delay = 10*1000;
+//     db.pendingRequest().then((transInfo) => {
+//         console.log(transInfo)
+//         stc.sendTransaction(sourceKeyBase, db, transInfo) 
+//     }).catch((e) => {
+//         console.log('No New Transactions');
+//         return delayFn(delay).then(() => { return  transactions(db, sourceKeyBase, stc) });
+//     }).then(() => {
+//         console.log('looping Transactions...');
+//         return delayFn(delay).then(() => { return  transactions(db, sourceKeyBase, stc) });
+//       });
+// }
 
-function assets(db, sourceKeyBase, sourceKeyIssuing, stc) {
-    const delay = 15*1000;
-    db.pendingAssets().then((assetInfo) => {
-        console.log(assetInfo)
-        stc.createAsset(sourceKeyBase, sourceKeyIssuing, assetInfo)
-    }).catch((e) => {
-        console.log('No New assets');
-        return delayFn(delay).then(() => { return  assets(db, sourceKeyBase, sourceKeyIssuing, stc) });
-    }).then(() => {
-        console.log('looping assets...');
-        return delayFn(delay).then(() => { return  assets(db, sourceKeyBase, sourceKeyIssuing, stc) });
-      });
-}
+// function assets(db, sourceKeyBase, sourceKeyIssuing, stc) {
+//     const delay = 15*1000;
+//     db.pendingAssets().then((assetInfo) => {
+//         console.log(assetInfo)
+//         stc.createAsset(sourceKeyBase, sourceKeyIssuing, assetInfo)
+//     }).catch((e) => {
+//         console.log('No New assets');
+//         return delayFn(delay).then(() => { return  assets(db, sourceKeyBase, sourceKeyIssuing, stc) });
+//     }).then(() => {
+//         console.log('looping assets...');
+//         return delayFn(delay).then(() => { return  assets(db, sourceKeyBase, sourceKeyIssuing, stc) });
+//       });
+// }
 
-transactions(db, sourceKeyBase, stc)
-assets(db, sourceKeyBase, sourceKeyIssuing, stc)
+//transactions(db, sourceKeyBase, stc)
+//assets(db, sourceKeyBase, sourceKeyIssuing, stc)
+db.pendingRequest().then((transInfo) => {
+    console.log(transInfo)
+    stc.sendTransaction(sourceKeyBase, db, transInfo) 
+})
 

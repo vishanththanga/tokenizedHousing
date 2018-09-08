@@ -29,10 +29,11 @@ module.exports = {
         }) 
         .then((sourceAccount) => {
             console.log(transInfo[0].assetCode)
+            const asset = new StellarSdk.Asset('hTwo', 'GDITTRBNRNKBBEKQXSMPUOBDIM5UY25SMDFH44Q2ACXW5S4T3YXEC2TQ')
             transaction = new StellarSdk.TransactionBuilder(sourceAccount)
               .addOperation(StellarSdk.Operation.payment({
                   destination: destinationId,
-                  asset: StellarSdk.Asset.native(),//new StellarSdk.Asset(transInfo[0].assetCode, 'GDITTRBNRNKBBEKQXSMPUOBDIM5UY25SMDFH44Q2ACXW5S4T3YXEC2TQ'),
+                  asset: asset, //StellarSdk.Asset.native(),//
                   amount: transInfo[0].amount
               }))
               .addMemo(StellarSdk.Memo.text(`To: ${transInfo[0].to}, from:${transInfo[0].from}`))
