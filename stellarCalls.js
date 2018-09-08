@@ -33,7 +33,7 @@ module.exports = {
               .addOperation(StellarSdk.Operation.payment({
                   destination: destinationId,
                   asset: StellarSdk.Asset.native(),
-                  amount: transInfo[0].amount
+                  amount: '1'
               }))
               .addMemo(StellarSdk.Memo.text(`T: ${transInfo[0].to} f:${transInfo[0].from} AC:${transInfo[0].assetCode} AM:${transInfo[0].amount}`))
               .build();
@@ -57,36 +57,70 @@ module.exports = {
             })
     },
 
-   createAsset(sourceKeyBase, sourceKeyIssuing, assetInfo) {
-       server.loadAccount(sourceKeyBase.publicKey())
-        .then((receiver) => {
-          const transaction = new StellarSdk.TransactionBuilder(receiver)
-            .addOperation(StellarSdk.Operation.changeTrust({
-                asset: new StellarSdk.Asset(assetInfo[0].assetCode, sourceKeyIssuing.publicKey()),
-                limit: assetInfo[0].totalToken
-            })).addMemo(StellarSdk.Memo.text(`Owner: ${assetInfo[0].owner}`))     
-            .build();
-            transaction.sign(sourceKeyBase); 
-            return server.submitTransaction(transaction);
-        })
-        .then(() => server.loadAccount(sourceKeyIssuing.publicKey()))
-        .then((issuer) => {
-            const transaction = new StellarSdk.TransactionBuilder(issuer)
-              .addOperation(StellarSdk.Operation.payment({
-                  destination: sourceKeyBase.publicKey(),
-                  asset: new StellarSdk.Asset(assetInfo[0].assetCode, sourceKeyIssuing.publicKey()),
-                  amount: assetInfo[0].totalToken,
-              }))
-              .build()
-              transaction.sign(sourceKeyIssuing);
-              return server.submitTransaction(transaction);
 
-        }).then((result) => {
-            console.log(result);
-            return db.updateAssetToOne(assetInfo[0].houseId).then(() => {
-                return db.updateAssetOwner(assetInfo[0].owner, (parseInt(assetInfo[0].totalToken) - parseInt(assetInfo[0].tokenSale)))
-        })
+    createAsset (sourceKeyBase, db, assetInfo) {
+        server.loadAccount(destinationId)
+         .catch(StellarSdk.NotFoundError, (error) => {
+             throw new Error('Account Does Not Exist');
+         })
+         .then(() => {
+             return server.loadAccount(sourceKeyBase.publicKey())
+         }) 
+         .then((sourceAccount) => {
+             transaction = new StellarSdk.TransactionBuilder(sourceAccount)
+               .addOperation(StellarSdk.Operation.payment({
+                   destination: destinationId,
+                   asset: StellarSdk.Asset.native(),
+                   amount: '1'
+               }))
+               .addMemo(StellarSdk.Memo.text(`AC: ${assetInfo[0].assetCode} O${assetInfo[0].owner} T${assetInfo[0].totalToken} TS${assetInfo[0].tokenSale}`))
+               .build();
+ 
+               transaction.sign(sourceKeyBase);
+ 
+               return server.submitTransaction(transaction);
+             })
+             .then((result) => {
+                 console.log('Transaction Successful', result)
+                 console.log(assetInfo);
+                 return db.updateAssetToOne(assetInfo[0].houseId).then(() => {
+                    return db.updateAssetOwner(assetInfo[0].owner, (parseInt(assetInfo[0].totalToken) - parseInt(assetInfo[0].tokenSale)))
+                 })
+             }).catch((error) => {
+                 console.log('Transaction Failed', error)
+             })
+     },
+
+//    createAsset(sourceKeyBase, sourceKeyIssuing, assetInfo) {
+//        server.loadAccount(sourceKeyBase.publicKey())
+//         .then((receiver) => {
+//           const transaction = new StellarSdk.TransactionBuilder(receiver)
+//             .addOperation(StellarSdk.Operation.changeTrust({
+//                 asset: new StellarSdk.Asset(assetInfo[0].assetCode, sourceKeyIssuing.publicKey()),
+//                 limit: assetInfo[0].totalToken
+//             })).addMemo(StellarSdk.Memo.text(`Owner: ${assetInfo[0].owner}`))     
+//             .build();
+//             transaction.sign(sourceKeyBase); 
+//             return server.submitTransaction(transaction);
+//         })
+//         .then(() => server.loadAccount(sourceKeyIssuing.publicKey()))
+//         .then((issuer) => {
+//             const transaction = new StellarSdk.TransactionBuilder(issuer)
+//               .addOperation(StellarSdk.Operation.payment({
+//                   destination: sourceKeyBase.publicKey(),
+//                   asset: new StellarSdk.Asset(assetInfo[0].assetCode, sourceKeyIssuing.publicKey()),
+//                   amount: assetInfo[0].totalToken,
+//               }))
+//               .build()
+//               transaction.sign(sourceKeyIssuing);
+//               return server.submitTransaction(transaction);
+
+//         }).then((result) => {
+//             console.log(result);
+//             return db.updateAssetToOne(assetInfo[0].houseId).then(() => {
+//                 return db.updateAssetOwner(assetInfo[0].owner, (parseInt(assetInfo[0].totalToken) - parseInt(assetInfo[0].tokenSale)))
+//         })
         
-     }).catch(console.error)
-  }  
+//      }).catch(console.error)
+//   }  
 }

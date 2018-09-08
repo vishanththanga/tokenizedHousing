@@ -81,20 +81,20 @@ app.listen(port, () => {
 
 //all stellar
 
-// const delayFn = function (ms) {
-//     return new Promise((resolve, reject) => {
-//       setTimeout(resolve, ms);
-//     });
-// }
+const delayFn = function (ms) {
+    return new Promise((resolve, reject) => {
+      setTimeout(resolve, ms);
+    });
+}
 
-db.pendingRequest().then((transInfo) => {
-    console.log(transInfo)
-    return stc.sendTransaction(sourceKeyBase, db, transInfo , server) 
-})
-
-// db.pendingAssets().then((assetInfo) => {
-//     return stc.createAsset(sourceKeyBase, sourceKeyIssuing, assetInfo);
+// db.pendingRequest().then((transInfo) => {
+//     console.log(transInfo)
+//     return stc.sendTransaction(sourceKeyBase, db, transInfo , server) 
 // })
+
+db.pendingAssets().then((assetInfo) => {
+    return stc.createAsset(sourceKeyBase, db, assetInfo);
+})
 
 
 

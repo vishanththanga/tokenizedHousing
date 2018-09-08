@@ -24,9 +24,9 @@ module.exports = {
         return knex('Houses').where({ 'status': 0 }).orderBy('created_at', 'asc')
     },
 
-    updateAssetToOne(hosueId) {
+    updateAssetToOne(houseId) {
         console.log(`Updating ${houseId} to 1`)
-        return knex('Transactions').where('hosueId', hosueId).update({ 'status': 1 })
+        return knex('Houses').where('houseId', houseId).update({ 'status': 1 })
     },
 
     assetInfo(assetCode) {
