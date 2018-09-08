@@ -81,6 +81,11 @@ app.listen(port, () => {
 }); 
 
 //all stellar
-db.pendingRequest().then((transInfo) => {
+/*db.pendingRequest().then((transInfo) => {
     stc.sendTransaction(sourceKeyBase, stc, db, transInfo) 
+})*/
+
+db.pendingAssets().then((assetInfo) => {
+    console.log(assetInfo)
+    stc.createAsset(sourceKeyBase, sourceKeyIssuing, assetInfo)
 })

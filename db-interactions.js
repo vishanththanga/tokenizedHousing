@@ -2,6 +2,7 @@ require('dotenv').config();
 const knex = require('knex')(require('./knexfile'));
 
 module.exports = {
+    // transaction databse 
     pendingRequest() {
         console.log('Pulling All Transactions with Status of 0')
         return knex('Transactions').where({ 'status': 0 }).orderBy('created_at', 'asc')
@@ -17,8 +18,14 @@ module.exports = {
         return knex('Transactions').where('txNum', txNum).update({ 'txhash': txhash })
     },
 
-    revertTx(txNum) {
-        console.log(`Revert Transaction ${txNum}`)
-        return knex.where('Transactions').where('txNum', txNum).update({ 'status': 0 })
-    }
+    // houses 
+    pendingAssets() {
+        console.log('Getting All Assets that need to be created')
+        return knex('Houses').where({ 'status': 0 }).orderBy('created_at', 'asc')
+    },
+
+    updateAssetToOne(hosueId) {
+        console.log(`Updating ${houseId} to 1`)
+        return knex('Transactions').where('hosueId', hosueId).update({ 'status': 1 })
+    },
 }
