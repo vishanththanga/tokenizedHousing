@@ -1,5 +1,5 @@
 
-exports.up = knex => knex.schema.createTable('Accounts', (t) => {
+exports.up = knex => knex.schema.createTable('Houses', (t) => {
     t.string('accountId').primary();
     t.string('House:1').defaultTo(0);
     t.string('House:3').defaultTo(0);
