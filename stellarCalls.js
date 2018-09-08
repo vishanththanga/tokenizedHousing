@@ -7,8 +7,8 @@ const stc = require('./stellarCalls.js')
 
 //Base Account
 const sourceKeyBase = StellarSdk.Keypair
-  .fromSecret('SASY24Y4OOP3SLWJ3JNNNXQQMIS5ZAMB6BHRUMZCJCKAE4ZNWWEDDTO4');
-const destinationId = 'GBBEWXGEY37KFQN6BFCHXLEQMDMVADGIS22S3XKYZSMJPCT6HFU6VBHW';
+  .fromSecret('SBX7XHSD7ISYPDE7VYUCS6KAKKQQJ27CG7TVDXHEJIZT2T2TIDFHTRTG');
+const destinationId = 'GB5R2C2HKU5SZNRMMNVUSUELQTB55EPU6HSRFGF63RPTJYZK22B7RK6J';
 
 //issueingAccount
 const sourceKeyIssuing = StellarSdk.Keypair
@@ -29,11 +29,10 @@ module.exports = {
         }) 
         .then((sourceAccount) => {
             console.log(transInfo[0].assetCode)
-            const asset = new StellarSdk.Asset('hTwo', 'GDITTRBNRNKBBEKQXSMPUOBDIM5UY25SMDFH44Q2ACXW5S4T3YXEC2TQ')
             transaction = new StellarSdk.TransactionBuilder(sourceAccount)
               .addOperation(StellarSdk.Operation.payment({
                   destination: destinationId,
-                  asset: asset, //StellarSdk.Asset.native(),//
+                  asset: new StellarSdk.Asset(transInfo[0].assetCode, 'GDITTRBNRNKBBEKQXSMPUOBDIM5UY25SMDFH44Q2ACXW5S4T3YXEC2TQ'),//
                   amount: transInfo[0].amount
               }))
               .addMemo(StellarSdk.Memo.text(`To: ${transInfo[0].to}, from:${transInfo[0].from}`))
@@ -75,19 +74,19 @@ module.exports = {
             const transaction = new StellarSdk.TransactionBuilder(issuer)
               .addOperation(StellarSdk.Operation.payment({
                   destination: sourceKeyBase.publicKey(),
-                  asset: new StellarSdk.Asset(assetInfo[0].assetCode, sourceKeyIssuing.publicKey()),
+                  asset: new StellarSdk.Asset('hTwo', sourceKeyIssuing.publicKey()),
                   amount: assetInfo[0].totalToken,
               }))
               .build()
               transaction.sign(sourceKeyIssuing);
               return server.submitTransaction(transaction);
+
         }).then((result) => {
             console.log(result);
             return db.updateAssetToOne(assetInfo[0].houseId).then(() => {
                 return db.updateAssetOwner(assetInfo[0].owner, (parseInt(assetInfo[0].totalToken) - parseInt(assetInfo[0].tokenSale)))
-            })
         })
-        .catch(console.log('Assets Failed'))
-
-   },
+        
+     }).catch(console.error)
+  }  
 }
