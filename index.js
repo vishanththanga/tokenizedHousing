@@ -75,17 +75,23 @@ app.post('/api/houseId', (req, res) => {
     }).then((house) => res.json(house));
 })
 
+app.post('/api/makePayment', (req, res) => {
+    console.log(req.body)
+    return stc.makePayment(db, sourceKeyBase ,req.body.txNum, req.body.amount)
+    .then(res.sendStatus(200))
+})
+
 
 app.listen(port, () => {
     console.log(`Running server on port ${config.server_port}`)
 }); 
 
 //all stellar
-/*db.pendingRequest().then((transInfo) => {
+db.pendingRequest().then((transInfo) => {
     stc.sendTransaction(sourceKeyBase, stc, db, transInfo) 
-})*/
-
+})
+/*
 db.pendingAssets().then((assetInfo) => {
     console.log(assetInfo)
     stc.createAsset(sourceKeyBase, sourceKeyIssuing, assetInfo)
-})
+}) */

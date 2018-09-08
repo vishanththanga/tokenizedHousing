@@ -5,7 +5,7 @@ exports.up = knex => knex.schema.createTable('Transactions', (t) => {
     t.string('from').notNullable();
     t.string('amount').notNullable();
     t.string('assetCode').notNullable();
-    t.integer('status').defaultTo(0);
+    t.integer('status').defaultTo(null);
     t.string('txhash').defaultTo('notAssigned');
     t.timestamps(true, true);
 });
