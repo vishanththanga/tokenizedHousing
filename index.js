@@ -12,6 +12,20 @@ const port = parseInt(config.server_port, 10);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+StellarSdk.Network.useTestNetwork();
+const server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
+let transaction;
+
+//Base Account
+const sourceKeyBase = StellarSdk.Keypair
+  .fromSecret(config.baseAccount.secret);
+const destinationId = 'GBBEWXGEY37KFQN6BFCHXLEQMDMVADGIS22S3XKYZSMJPCT6HFU6VBHW';
+
+//issueingAccount
+const sourceKeyIssuing = StellarSdk.Keypair
+  .fromSecret(config.issuingAccount.secret);
+
+//all express related calls are here
 app.post('/api/addAccount',(req, res) => {
     console.log(req.body)
     return store
@@ -64,3 +78,5 @@ app.post('/api/houseId', (req, res) => {
 app.listen(port, () => {
     console.log(`Running server on port ${config.server_port}`)
 }); 
+
+//all stellar 
