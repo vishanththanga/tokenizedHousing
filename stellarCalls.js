@@ -74,7 +74,10 @@ module.exports = {
               .build()
               transaction.sign(sourceKeyIssuing);
               return server.submitTransaction(transaction);
-        }).then(console.log)
+        }).then((result) => {
+            console.log(result);
+            return db.updateAssetToOne(assetInfo[0].houseId)
+        })
         .catch(console.error)
 
    }
