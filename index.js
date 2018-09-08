@@ -21,7 +21,7 @@ app.post('/api/addAccount', (res, req) => {
         sex: req.body.sex,
         dob: req.body.dob,
         email: req.body.email,
-        sex: req.body.sex,
+        telephone: req.body.telephone,
     })
     .then(res.sendStatus(200));
 })
@@ -56,7 +56,7 @@ app.get('/api/:houseId', (res, req) => {
     console.log(req.params.houseId)
     return store.getHouse ({
         hosueId: req.params.houseId,
-    }).then(res.sendStatus(200));
+    }).then(res.json(house));
 })
 
 app.listen(config.server_port).then(console.log(`Running on ${config.server_port}`))
