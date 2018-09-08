@@ -68,7 +68,7 @@ module.exports = {
             const transaction = new StellarSdk.TransactionBuilder(issuer)
               .addOperation(StellarSdk.Operation.payment({
                   destination: sourceKeyBase.publicKey(),
-                  asset: assetInfo[0].assetCode,
+                  asset: new StellarSdk.Asset(assetInfo[0].assetCode, sourceKeyIssuing.publicKey()),
                   amount: assetInfo[0].totalToken,
               }))
               .build()
