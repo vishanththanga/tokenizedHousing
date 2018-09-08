@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+</head>
+
+<!-- Body Start -->
+<body>
+
+ <form action="http://localhost:8080/api/addAccount" method="post">
+  <h3>Create An Account</h3> 
+  Account ID:<br>
+  <input type="text" name="accountId"><br>
+   FirstName:<br>
+  <input type="text" name="firstName"><br>
+  LastName:<br>
+   <input type="text" name="lastName"> <br>
+   address:<br>
+   <input type="text" name="address"> <br>  
+   Gender:<br>
+   <input type="text" name="sex"> <br>
+   Date Of Birth:<br>
+   <input type="text" name="dob"> <br>
+   Email:<br>
+   <input type="text" name="email"> <br>  
+   Telephone:<br>
+   <input type="text" name="telephone"> <br> 
+   <br>
+   <input type="submit" value="Submit">
+</form>
+
+<form action="http://localhost:8080/api/addTrans" method="post">
+  <h3>Create An Transaction</h3>
+    Transaction Number:<br>
+   <input type="text" name="txNum"><br>
+    To:<br>
+   <input type="text" name="to"><br>
+   From:<br>
+    <input type="text" name="from"> <br>
+    assetCode:<br>
+    <input type="text" name="assetCode"> <br>   
+    <br>
+    <input type="submit" value="Submit">
+ </form>
+
+ <form action="http://localhost:8080/api/addhouse" method="post">
+  <h3>Create An Asset</h3>
+    House Id:<br>
+   <input type="text" name="houseId"><br>
+    owner:<br>
+   <input type="text" name="owner"><br>
+   Total Amount Of Token Being Created:<br>
+    <input type="text" name="totalToken"> <br>
+    Amount Of Tokens For Sale:<br>
+    <input type="text" name="tokenSale"> <br>   
+    <br>
+    <input type="submit" value="Submit">
+ </form>
+ 
+
+ <form action="http://localhost:8080/api/:houseId" method="get">
+     <h3>Get Information For A House</h3>
+   Withdrawal ID:<br>
+  <input type="text" name="hosueId"><br><br>
+   <input type="submit" value="Submit">
+</form> 
+
+<br>
+<br>
+<h3>Get All Houses On Sale</h3>
+<a href="http://localhost:8080/api/houses"></a>
+</body>
+<!-- Body End -->
+
+</html>

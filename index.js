@@ -39,7 +39,7 @@ app.post('/api/addTrans', (res, req) => {
 app.post('/api/addHouse', (res, req) => {
     console.log(req.body)
     return store.addHouse ({
-        houseId: req.body.hosueId,
+        houseId: req.body.houseId,
         owner: req.body.owner,
         totalToken: req.body.totalToken,
         tokenSale: req.body.tokenSale,
