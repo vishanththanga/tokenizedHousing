@@ -27,7 +27,7 @@ module.exports = {
 
     addHouse ({houseId, owner, totalToken, tokenSale}) {
         console.log('Adding Tokens For Token Creation');
-        return knex.insert('Houses').insert({
+        return knex('Houses').insert({
             houseId,
             owner,
             totalToken,
@@ -35,13 +35,13 @@ module.exports = {
         });
     },
 
-    getAllHouse () {
+    getAllHouses () {
         console.log('Getting All TOkenized Housing For Sale')
         return knex('Houses').where({ 'status': 1 }).then(houses => houses);
     },
 
     getHouse ({houseId}) {
-        console.log(`Getting the house with Id ${hosueId}`);
+        console.log(`Getting the house with Id ${houseId}`);
         return knex('Houses').where({ 'houseId': houseId }).then(house => house)
     },
 }

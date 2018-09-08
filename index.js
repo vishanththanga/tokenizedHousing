@@ -53,10 +53,10 @@ app.get('/api/houses', (req, res) => {
         .then((houses) => res.json(houses));
 })
 
-app.get('/api/:houseId', (req, res) => {
-    console.log(req.params.houseId)
+app.post('/api/houseId', (req, res) => {
+    console.log(req.body)
     return store.getHouse ({
-        hosueId: req.params.houseId,
+        houseId: req.body.houseId,
     }).then((house) => res.json(house));
 })
 
