@@ -1,8 +1,10 @@
 
 exports.up = knex => knex.schema.createTable('Houses', (t) => {
-    t.string('accountId').primary();
-    t.string('House:1').defaultTo(0);
-    t.string('House:3').defaultTo(0);
+    t.string('houseId').primary();
+    t.string('owner').defaultTo(0);
+    t.string('totalToken').defaultTo(0);
+    t.string('tokenSale').defaultTo(0);
+    t.integer('status').defaultTo(0)
     t.timestamp(true, true);
   })
 
