@@ -57,6 +57,7 @@ app.post('/api/addHouse', (req, res) => {
     return store.addHouse ({
         houseId: req.body.houseId,
         owner: req.body.owner,
+        assetCode: req.body.assetCode,
         totalToken: req.body.totalToken,
         tokenSale: req.body.tokenSale,
     }).then(() => res.sendStatus(200));

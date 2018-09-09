@@ -31,6 +31,7 @@ module.exports = {
         return knex('Houses').insert({
             houseId,
             owner,
+            assetCode,
             totalToken,
             tokenSale
         });
