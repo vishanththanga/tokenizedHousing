@@ -1,0 +1,175 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Rx is a Personal Portfolio Template">
+        <meta name="keywords" content="mhbthemes, resume, cv, portfolio, personal, developer, designer,personal resume, onepage, clean, modern">
+        <meta name="author" content="Alex Smith">
+
+        <title>Flawnson</title>
+        
+         <!-- Favicon -->
+        <link rel="shortcut icon" href="Static/img/Favicon.png" type="image/png">
+
+        <!--== bootstrap ==-->
+        <link href="Static/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!--== animate ==-->
+        <link href="Static/css/animate.min.css" rel="stylesheet">
+        
+        <!--== font-awesome ==-->
+        <link href="Static/css/font-awesome.min.css" rel="stylesheet">
+        
+        <!--== owl carousel ==-->
+        <link href="Static/css/owl.carousel.css" rel="stylesheet">
+
+        <!--== style css ==-->
+        <link href="Static/css/style.css" rel="stylesheet">
+        
+        <!--== form css ==-->
+        <link href="Static/css/form.css" rel="stylesheet">
+        
+        <!--== responsive css ==-->
+        <link href="Static/css/responsive.css" rel="stylesheet">
+        
+        <!--== Main css ==-->
+        <link href="Static/css/main.css" rel="stylesheet">
+                
+        <!--== jQuery ==-->
+        <script src="Static/js/jquery-2.1.4.min.js"></script>
+
+        <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body data-gr-c-s-loaded="true" style="background: rgb(242, 242, 242);">
+        <div class="loader" style="display: none;">
+            </div><section class="content">
+            <!-- uiView:  -->
+            <section ui-view="" class="ng-scope">
+                <section class="public-form ng-scope">
+	               <submit-form-directive myform="myform" class="ng-isolate-scope">
+                    <div class="form-fields" ng-show="!myform.submitted &amp;&amp; !myform.startPage.showStart" ng-style="{ 'border-color': myform.design.colors.buttonTextColor }" style="border-color: rgb(255, 255, 255);">
+                    <div class="row form-field-wrapper">
+                    <form name="forms.myForm" novalidate="" class="submission-form ng-pristine ng-invalid ng-invalid-required ng-valid-pattern ng-valid-email">
+    <!-- ngRepeat: field in myform.form_fields -->
+    <!-- ngIf: !field.deletePreserved -->
+        <div ng-repeat="field in myform.form_fields" ng-if="!field.deletePreserved" data-index="0" data-id="598cb9ed70e400881b758d72" ng-class="{activeField: selected._id == field._id }" class="row field-directive ng-scope activeField">
+        <field-directive field="field" design="myform.design" index="$index" forms="forms" class="ng-isolate-scope">
+            <div class="textfield field row ng-scope" ng-click="setActiveField(field._id, index, true)">
+        <div class="col-xs-12 field-title row-fluid" ng-style="{'color': design.colors.questionColor}" style="color: rgb(4, 54, 54);">
+            <h3 class="col-xs-12 ng-binding size"><font size="13">Get house information</font></h3>
+            <h3 class="col-xs-12 ng-binding">
+                <small class="field-number ng-binding">1
+                </small>
+                House ID (3 Digits)
+            </h3>
+        <p class="col-xs-12">
+            <small class="ng-binding">Type any combination of numbers</small>
+        </p>
+        </div>
+        <div class="col-xs-12 field-input">
+            <input ng-style="{'color': design.colors.answerColor, 'border-color': design.colors.answerColor}" name="textfield0" type="text" placeholder="123ABC" ng-class="{ 'no-border': !!field.fieldValue }" class="focusOn text-field-input ng-pristine ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-focus="setActiveField(field._id, null, false)" ng-model="field.fieldValue" ng-model-options="{ debounce: 250 }" value="" on-enter-or-tab-key="nextField()" on-tab-and-shift-key="prevField()" ng-required="field.required" aria-describedby="inputError2Status" required="required" style="color: rgb(9, 150, 150); border-color: rgb(9, 150, 150);">
+            <div class="btn btn-lg btn-default" ng-disabled="!field.fieldValue || field.$invalid" style="padding: 4px; margin-top:8px; background: rgba(255,255,255,0.5)" disabled="disabled">
+                    <div class="col-xs-6 col-sm-3">
+                        <small style="color:#7cb7b6; font-size:70%" class="ng-binding">press TAB</small>
+                    </div>
+                    </div>
+            
+        </div>
+        <div class="col-xs-12">
+            <span class="sr-only ng-binding">Error:</span>
+            <!-- ngIf: field.fieldType == 'email' -->
+            <!-- ngIf: field.fieldType == 'number' -->
+            <!-- ngIf: field.fieldType == 'link' -->
+        </div>
+        </div>
+            <div ng-repeat="field in myform.form_fields" ng-if="!field.deletePreserved" data-index="0" data-id="598cb9ed70e400881b758d72" ng-class="{activeField: selected._id == field._id }" class="row field-directive ng-scope activeField">
+        <field-directive field="field" design="myform.design" index="$index" forms="forms" class="ng-isolate-scope">
+            <div class="textfield field row ng-scope" ng-click="setActiveField(field._id, index, true)">
+        <div class="col-xs-12 field-title row-fluid" ng-style="{'color': design.colors.questionColor}" style="color: rgb(4, 54, 54);">
+            <h3 class="col-xs-12 ng-binding">
+                <small class="field-number ng-binding">2
+                </small>
+                Property Owner
+            </h3>
+        <p class="col-xs-12">
+            <small class="ng-binding">The majority owner of the property.</small>
+        </p>
+        </div>
+        <div class="col-xs-12 field-input">
+            <input ng-style="{'color': design.colors.answerColor, 'border-color': design.colors.answerColor}" name="textfield0" type="text" placeholder="John" ng-class="{ 'no-border': !!field.fieldValue }" class="focusOn text-field-input ng-pristine ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-focus="setActiveField(field._id, null, false)" ng-model="field.fieldValue" ng-model-options="{ debounce: 250 }" value="" on-enter-or-tab-key="nextField()" on-tab-and-shift-key="prevField()" ng-required="field.required" aria-describedby="inputError2Status" required="required" style="color: rgb(9, 150, 150); border-color: rgb(9, 150, 150);">
+            <div class="btn btn-lg btn-default" ng-disabled="!field.fieldValue || field.$invalid" style="padding: 4px; margin-top:8px; background: rgba(255,255,255,0.5)" disabled="disabled">
+                    <div class="col-xs-6 col-sm-3">
+                        <small style="color:#7cb7b6; font-size:70%" class="ng-binding">press TAB</small>
+                    </div>
+                    </div>
+            
+        </div>
+        <div class="col-xs-12">
+            <span class="sr-only ng-binding">Error:</span>
+            <!-- ngIf: field.fieldType == 'email' -->
+            <!-- ngIf: field.fieldType == 'number' -->
+            <!-- ngIf: field.fieldType == 'link' -->
+        </div>
+        </div>
+            
+                <div ng-repeat="field in myform.form_fields" ng-if="!field.deletePreserved" data-index="0" data-id="598cb9ed70e400881b758d72" ng-class="{activeField: selected._id == field._id }" class="row field-directive ng-scope activeField">
+        <field-directive field="field" design="myform.design" index="$index" forms="forms" class="ng-isolate-scope">
+            <div class="textfield field row ng-scope" ng-click="setActiveField(field._id, index, true)">
+        <div class="col-xs-12 field-title row-fluid" ng-style="{'color': design.colors.questionColor}" style="color: rgb(4, 54, 54);">
+            <h3 class="col-xs-12 ng-binding">
+                <small class="field-number ng-binding">3
+                </small>
+                Number of Tokens to be created
+            </h3>
+        <p class="col-xs-12">
+            <small class="ng-binding">Any amount of tokens to your liking.</small>
+        </p>
+        </div>
+        <div class="col-xs-12 field-input">
+            <input ng-style="{'color': design.colors.answerColor, 'border-color': design.colors.answerColor}" name="textfield0" type="text" placeholder="Smith" ng-class="{ 'no-border': !!field.fieldValue }" class="focusOn text-field-input ng-pristine ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-focus="setActiveField(field._id, null, false)" ng-model="field.fieldValue" ng-model-options="{ debounce: 250 }" value="" on-enter-or-tab-key="nextField()" on-tab-and-shift-key="prevField()" ng-required="field.required" aria-describedby="inputError2Status" required="required" style="color: rgb(9, 150, 150); border-color: rgb(9, 150, 150);">
+            <div class="btn btn-lg btn-default" ng-disabled="!field.fieldValue || field.$invalid" style="padding: 4px; margin-top:8px; background: rgba(255,255,255,0.5)" disabled="disabled">
+                    <div class="col-xs-6 col-sm-3">
+                        <small style="color:#7cb7b6; font-size:70%" class="ng-binding">press TAB</small>
+                    </div>
+                    </div>
+            
+        </div>
+        <div class="col-xs-12">
+            <span class="sr-only ng-binding">Error:</span>
+            <!-- ngIf: field.fieldType == 'email' -->
+            <!-- ngIf: field.fieldType == 'number' -->
+            <!-- ngIf: field.fieldType == 'link' -->
+        </div>
+        </div>
+            
+              <div class="textfield field row ng-scope" ng-click="setActiveField(field._id, index, true)">
+                <div class="col-xs-12 field-title row-fluid" ng-style="{'color': design.colors.questionColor}" style="color: rgb(4, 54, 54);">
+                    <h3 class="col-xs-12 ng-binding">
+                        <small class="field-number ng-binding">4
+                        </small>
+                        Amount of Tokens for sale
+                        <span class="required-error ng-binding ng-hide" ng-show="!field.required">
+                        </span>
+                    </h3>
+                    <p class="col-xs-12">
+                        <small class="ng-binding">The amount of tokens you are willing to sell.</small>
+                    </p>
+                </div>
+                <div class="col-xs-12 field-input">
+                    <input ng-style="{'color': design.colors.answerColor, 'border-color': design.colors.answerColor}" name="email1" type="email" placeholder="joesmith@example.com" ng-class="{ 'no-border': !!field.fieldValue }" class="focusOn text-field-input ng-pristine ng-untouched ng-valid-email ng-invalid ng-invalid-required ng-valid-pattern" ng-focus="setActiveField(field._id, null, false)" ng-model="field.fieldValue" ng-model-options="{ debounce: 250 }" value="" on-enter-or-tab-key="nextField()" on-tab-and-shift-key="prevField()" ng-required="field.required" aria-describedby="inputError2Status" required="required" style="color: rgb(9, 150, 150); border-color: rgb(9, 150, 150);">
+                </div>
+                        <!-- end ngIf: field.fieldType == 'email' -->
+                        <!-- ngIf: field.fieldType == 'number' -->
+                        <!-- ngIf: field.fieldType == 'link' -->
+                    </div>
+                <div class="ng-scope">
+                    <div class="btn btn-lg btn-default" ng-disabled="!field.fieldValue || field.$invalid" style="padding: 4px; margin-top:8px; background: rgba(255,255,255,0.5)" disabled="disabled">
+                    <div class="col-xs-6 col-sm-3">
+                        <small style="color:#7cb7b6; font-size:70%" class="ng-binding">press TAB</small>
+                    </div>
+                    </div>
