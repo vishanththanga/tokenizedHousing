@@ -29,4 +29,4 @@ BASE_ACCOUNT= <br>
 ISSUING_SECRET= <br>
 
 <h3>Notes</h3>
-Only the index.html file in the public folder is functional when it comes to adding things to the databases and interacting with the databases, other files are for aesthetic and are not functional. They are more of mockups of what a future product may look like.
+Only the index.html file in the public folder is functional when it comes to adding things to the databases and interacting with the databases, other files are for aesthetic and are not functional. They are more of mockups of what a future product may look like. Nevetheless, our future is bright and we are excited to work on bringing our vision to life. You do not want to miss out on The People's Estate.
