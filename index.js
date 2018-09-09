@@ -86,15 +86,36 @@ const delayFn = function (ms) {
       setTimeout(resolve, ms);
     });
 }
+function transactions(sourceKeyBase, db, server, stc) {
+    const delay = 7*1000
+    db.pendingRequest().then((transInfo) => {
+        console.log(transInfo)
+        return stc.sendTransaction(sourceKeyBase, db, transInfo , server) 
+    }).catch((e) => {
+        console.log('No Transactions')
+        return delayFn(delay).then(() => { return transactions(sourceKeyBase, db, server, stc) });
+    }).then(() => {
+        console.log('Looping Transacations...')
+        return delayFn(delay).then(() => { return transactions(sourceKeyBase, db, server, stc) });
+    })
+}
 
-// db.pendingRequest().then((transInfo) => {
-//     console.log(transInfo)
-//     return stc.sendTransaction(sourceKeyBase, db, transInfo , server) 
-// })
+function assets(sourceKeyBase, db, server, stc) {
+    const delay = 7*1000
+    db.pendingAssets().then((assetInfo) => {
+        return stc.createAsset(sourceKeyBase, db, assetInfo); 
+    }).catch((e) => {
+        console.log('No Assetss')
+        return delayFn(delay).then(() => { return assets(sourceKeyBase, db, server, stc) });
+    }).then(() => {
+        console.log('Looping Assets...')
+        return delayFn(delay).then(() => { return assets(sourceKeyBase, db, server, stc) });
+    })
+}
 
-db.pendingAssets().then((assetInfo) => {
-    return stc.createAsset(sourceKeyBase, db, assetInfo);
-})
+transactions(sourceKeyBase, db, server, stc);
+assets(sourceKeyBase, db, server, stc);
+
 
 
 
