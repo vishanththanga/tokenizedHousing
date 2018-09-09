@@ -1,7 +1,7 @@
 # tokenizedHousing
 <b>Building Housing Tokens to Create a Real Time Stock Market for Real Estate</b>
 
-Real Estate is the one of the few industries that are still stuck in the past. We still live in a place where if you want to invest in Real Estate, you have to be very rich, meaning that the poorest people of the soceity cannot have access to it as an investment. Furthermore, people are not able to derversify their investments, or easily short real estate, meaning the market forces are not fast enough when it comes to correcting bubbles and deflationary periods. That is why we are trying to create a system that is semi centralized to tokenize real estate and create the infastructure for stock markets for real estate to exist. We are doing this by using the Stelllar Network, and its memo fields to have a publicly verifiable ledger for all transactions, and also still be AML and KYC compliant. 
+Real Estate is an industry stuck in the past. Despite the enormous demand for residential real estate investing, we still live under conditions where if you want to invest, you have to be very rich. Consequently, the working class does not have access to investing and cannot diversify their portfolio. Moreover, it is extremely easy for individuals to "short" residential properties, not allocating the market enough time to correct bubbles and deflationary periods. That is why The People's Estate is creating a system that is semi centralized to tokenize real estate and create the infrastructure for a real estate "stock market." Our protocols use the Stelllar Network, and its memo fields to have a publicly verifiable ledger for all transactions, while still maintaining AML and KYC compliant. The People's Estate is a team of individuals not much different than you working to decentralize real estate and give back power back to the people.  
 
 <h3>API End Points:</h3>
 <b>Create Account (Post)</b>
@@ -29,4 +29,4 @@ BASE_ACCOUNT= <br>
 ISSUING_SECRET= <br>
 
 <h3>Notes</h3>
-Only the index.html file in the public folder is functional when it comes to adding things to the databases and interacting with teh databases, other files are for aesthetic and are not functional. They are more of mockups of what a future product may look like.
+Only the index.html file in the public folder is functional when it comes to adding things to the databases and interacting with the databases, other files are for aesthetic and are not functional. They are more of mockups of what a future product may look like.
