@@ -1,5 +1,5 @@
 # tokenizedHousing
-<b>Building Housing Tokens to Create a Real Time Stock Market for Real Estate</b>
+<b>Ownership trading platform for real estate equities markets</b>
 
 Real Estate is an industry stuck in the past. Despite the enormous demand for residential real estate investing, we still live under conditions where if you want to invest, you have to be very rich. Consequently, the working class does not have access to investing and cannot diversify their portfolio. Moreover, tokenization makes it extremely easy for individuals to "short" residential properties, not allocating the market enough time to correct bubbles and deflationary periods. That is why The People's Estate is creating a system that is semi centralized to tokenize real estate and create the infrastructure for a real estate "stock market." Our protocols use the Stelllar Network, and its memo fields to have a publicly verifiable ledger for all transactions, while still maintaining AML and KYC compliant. The People's Estate is a team of individuals not much different than you working to decentralize real estate and give back power back to the people.  
 
